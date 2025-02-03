@@ -71,7 +71,7 @@ local function _ligo_download()
 			"Failed to get static linux binary URL!\nPlease try to specify LIGO_VERSION in configuration section of your app.hjson.")
 
 		log_info("Downloading " .. _latest.tag_name .. " ligo binary...")
-		net.download_file(_ligoUrl, _ligoDestination, { showDefaultProgress = 10 })
+		net.download_file(_ligoUrl, _ligoDestination, { show_default_progress = 10 })
 		fs.chmod(_ligoDestination, 755)
 		log_success("ligo binary downloaded")
 	end

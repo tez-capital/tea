@@ -32,7 +32,7 @@ local function _get_ligo_cmd()
 end
 
 local function _find_file(dir, name)
-	local _candidates = fs.read_dir(dir, { returnFullPaths = true, asDirEntries = true })
+	local _candidates = fs.read_dir(dir, { return_full_paths = true, as_dir_entries = true })
 	for _, candidate in ipairs(_candidates) do
 		if string.match(candidate:name(), "^" .. name) then
 			return candidate:fullpath()

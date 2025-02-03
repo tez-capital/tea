@@ -21,8 +21,8 @@ return {
 			action = function(_options, _, _, _)
 				local _noOptions = #table.keys(_options) == 0
 				if _noOptions or _options.clean then
-					local _entries = fs.read_dir("build", { returnFullPaths = true }) --[=[@as string[]]=]
-					_entries = util.merge_arrays(_entries, fs.read_dir("web/dist", { returnFullPaths = true }) --[=[@as string[]]=]) --[=[@as string[]]=]
+					local _entries = fs.read_dir("build", { return_full_paths = true }) --[=[@as string[]]=]
+					_entries = util.merge_arrays(_entries, fs.read_dir("web/dist", { return_full_paths = true }) --[=[@as string[]]=]) --[=[@as string[]]=]
 					for _, _entry in ipairs(_entries) do
 						if not _entry:match(".gitkeep$") then
 							fs.remove(_entry --[[@as string]], { recurse = true })
