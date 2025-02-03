@@ -12,7 +12,7 @@ if _ok then
 		local _readyOcViews = {}
 		local _vars = util.merge_tables(_computed.LIGO_VARS, _computed.METADATA_VARS, true)
 		local _cmd = _computed.LIGO_VARS.LIGO .. " compile expression" ..
-			' ${SYNTAX} ${MODULE}.${name}${OFFCHAIN_VIEW_EXP_SUFFIX} --init-file ${FILE} --michelson-format json ${PROTOCOL_ARG}'
+			' ${SYNTAX} ${name}${OFFCHAIN_VIEW_EXP_SUFFIX} --init-file ${FILE} --michelson-format json --function-body'
 
 		for _, v in ipairs(_ocViews) do
 			log_info("Compiling offchain view '${name}'...", v)

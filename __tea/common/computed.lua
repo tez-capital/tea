@@ -17,7 +17,6 @@ local _containerEngine = _get_container_engine()
 -- ligo
 local _ligoContainer = type(am.app.get_configuration({ "ligo", "image" })) == "string"
 local _globalLigo = am.app.get_configuration({ "ligo", "global" }, false) == true
-local _protocol = am.app.get_configuration({ "ligo", "protocol" })
 local _syntax = am.app.get_configuration({ "ligo", "syntax" }, "cameligo")
 local function _get_ligo_cmd()
 	if _ligoContainer then
@@ -64,8 +63,6 @@ return {
 		LIGO = _get_ligo_cmd(),
 		CONTRACT_ID = am.app.get("id", "tea-contract"),
 		FILE = am.app.get_configuration({ "ligo", "contract-file" }, _find_file("src", "contract")),
-		PROTOCOL = _protocol,
-		PROTOCOL_ARG = _protocol and "--protocol " .. _protocol or "",
 		SYNTAX = _syntax,
 		SYNTAX_ARG = "--syntax " .. _syntax,
 		BUILD_DIR = am.app.get_configuration({ "ligo", "build-directory" }, "build"),

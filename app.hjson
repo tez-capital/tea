@@ -28,19 +28,18 @@ configuration: {
 		// global: true
 		version: latest
 		// or exact
-		// version: 1.6.0
+		// version: 1.9.2
 		// or container
-		// image: ligolang/ligo:1.6.0
+		// image: ligolang/ligo:1.9.2
 		// syntax: jsligo
-		protocol: oxford2
 		// initial-storage-args: (${admin-addr}: address), ${metadata}
 		// module: C
 	}
 	sandbox: {
 		// name: tezos-sandbox
 		// defaults to `sandbox-${id}`
-		image: ghcr.io/tez-capital/tezbox:tezos-v19.2
-		script: oxfordbox
+		image: ghcr.io/tez-capital/tezbox:tezos-v21.3
+		script: quebecbox
 		// rpc_port: 20000
 	}
 	metadata: {
