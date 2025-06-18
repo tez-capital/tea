@@ -9,7 +9,7 @@ net.download_file("https://github.com/alis-is/ami/releases/latest/download/meta.
 	{ follow_redirects = true })
 
 log_info("Extracting metas...")
-zip.extract(_eliMetaZip, _metaStore .. "eli", { flattenRootDir = true })
-zip.extract(_amiMetaZip, _metaStore .. "ami", { flattenRootDir = true })
+zip.extract(_eliMetaZip, _metaStore .. "eli", { flatten_root_dir = true })
+zip.extract(_amiMetaZip, _metaStore .. "ami", { flatten_root_dir = true })
 
 log_success("eli & ami definitions downloaded")
