@@ -79,18 +79,18 @@ end
 
 _ligo_download()
 
-local function _install_dependencies()
-	local _packageJsonFile = fs.read_file("package.json", { binaryMode = true })
-	local _ok, _parsed = hjson.safe_parse(_packageJsonFile)
-	ami_assert(_ok, "Invalid package.json!")
-	if #table.keys(_parsed.dependencies) > 0 then
+local function install_dependencies()
+	local package_json_file = fs.read_file("ligo.json", { binaryMode = true })
+	local  parsed, err = hjson.parse(package_json_file)
+	ami_assert(parsed, "invalid ligo.json - " .. tostring(err))
+	if #table.keys(parsed.dependencies) > 0 then
 		log_info("Installing ligo dependencies...")
 	local _cmd = string.interpolate("${LIGO} install", { LIGO = _ligoDestination })
 	log_debug(_cmd)
 	ami_assert(os.execute(_cmd),
 		"Failed to install ligo dependencies!")
 	else
-		log_info("No ligo dependencies found. Skipping dependecy setup...")
+		log_info("no ligo dependencies found - skipping dependency setup...")
 	end
 end
-_install_dependencies()
+install_dependencies()

@@ -21,3 +21,5 @@ deploy/*
 # esy (ligo packages)
 esy.lock
 _esy
+.ami-cache/
+**/.ami-cache/

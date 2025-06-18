@@ -93,6 +93,16 @@ return {
 			action = "__tea/tools/tests/ligo.lua",
 			contextFailExitCode = EXIT_APP_INTERNAL_ERROR
 		},
+		ligo = {
+			description = "TEA 'ligo' sub command",
+			summary = "Runs ligo binary with provided arguments",
+			type = 'external',
+            exec = '__tea/bin/ligo',
+			environment = {
+                HOME = os.cwd()
+            },
+			context_fail_exit_code = EXIT_APP_INTERNAL_ERROR
+		},
 		["test-js"] = {
 			description = "TEA 'test-js' sub command",
 			summary = "Runs ligo tests",

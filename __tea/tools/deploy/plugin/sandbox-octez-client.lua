@@ -14,16 +14,17 @@ return function(options)
 		SOURCE = options.source,
 		CONTRACT_CODE = string.trim(fs.read_file(string.interpolate("build/${ID}.tz", options))),
 		INITIAL_STORAGE = string.trim(fs.read_file(string.interpolate("build/${DEPLOYMENT_ID}-storage-${ID}.tz", options)))
- 	}, true)
+	}, true)
 
 	local _cmd = string.interpolate(_deployCmd, _vars)
 	log_debug(_cmd)
 	local _ok, _, _code = os.execute(_cmd)
 	if not _ok then error("exit code " .. tostring(_code)) end
 
-	local _result = proc.exec(string.interpolate(_checkCmd, _vars), { stdout = "pipe" })
-	if _result.exitcode ~= 0 then error("failed to get deployed contract address") end
-	local _deployFile = string.interpolate("deploy/${DEPLOYMENT_ID}-${ID}.json", options)
-	local _contractAddress = string.trim(_result.stdoutStream:read("a"))
-	if not fs.safe_write_file(_deployFile, hjson.stringify_to_json({ contractAddress = _contractAddress})) then error("failed to save contract address to ") end
+	local result = proc.exec(string.interpolate(_checkCmd, _vars), { stdout = "pipe" })
+	if result.exitcode ~= 0 then error("failed to get deployed contract address") end
+	local deploy_file = string.interpolate("deploy/${DEPLOYMENT_ID}-${ID}.json", options)
+	local contract_address = string.trim(result.stdoutStream:read("a"))
+	local written, _ = fs.write_file(deploy_file, hjson.stringify_to_json({ contractAddress = contract_address }))
+	if not written then error("failed to save contract address to " .. tostring(deploy_file) .. "'") end
 end
