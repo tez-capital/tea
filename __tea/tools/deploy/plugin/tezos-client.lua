@@ -23,7 +23,8 @@ return function(options)
 	local result = proc.exec(string.interpolate(_checkCmd, _vars), { stdout = "pipe" })
 	if result.exit_code ~= 0 then error("failed to get deployed contract address") end
 	local deploy_file = string.interpolate("deploy/${DEPLOYMENT_ID}-${ID}.json", options)
-	local contract_address = string.trim(result.stdout_stream:read("a"))
+	local output = string.trim(result.stdout_stream:read("a"))
+	local contract_address = string.trim(output:match("([^\n]*)$"))
 	local written, _ = fs.write_file(deploy_file, hjson.stringify_to_json({ contractAddress = contract_address }))
 	if not written then error("failed to save contract address to '" .. deploy_file .. "'") end
 end
