@@ -38,8 +38,8 @@ configuration: {
 	sandbox: {
 		// name: tezos-sandbox
 		// defaults to `sandbox-${id}`
-		image: ghcr.io/tez-capital/tezbox:tezos-v21.3
-		script: quebecbox
+		image: ghcr.io/tez-capital/tezbox:tezos-v22.1
+		script: riobox
 		// rpc_port: 20000
 	}
 	metadata: {

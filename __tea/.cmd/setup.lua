@@ -21,17 +21,17 @@ local function _ligo_download()
 			end
 
 			local _result = proc.exec("which ligo", { stdout = "pipe" })
-			if _result.exitcode ~= 0 then -- ligo not in the PATH use default destination
+			if _result.exit_code ~= 0 then -- ligo not in the PATH use default destination
 				_ligoDestination = "/usr/local/bin/ligo"
 			else
-				_ligoDestination = string.trim(_result.stdoutStream:read("a"))
+				_ligoDestination = string.trim(_result.stdout_stream:read("a"))
 			end
 		end
 
 		local _currentLigoVersion = "0.0.0"
 		local _result = proc.exec(string.interpolate("${LIGO} version -v", { LIGO = _ligoDestination }), { stdout = "pipe" })
-		if _result.exitcode == 0 then
-			_currentLigoVersion = string.trim(_result.stdoutStream:read("a"))
+		if _result.exit_code == 0 then
+			_currentLigoVersion = string.trim(_result.stdout_stream:read("a"))
 		end
 
 		if _ligoVersion ~= "latest" and ver.compare(_currentLigoVersion, _ligoVersion) == 0 then
